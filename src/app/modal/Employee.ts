@@ -7,28 +7,18 @@ export class Employee {
     password: string;
     gender: string;
     role: string;
-    createdDate: string;
-  
-    constructor(
-      employeeId: number,
-      employeeName: string,
-      contactNo: string,
-      emailId: string,
-      deptId: number,
-      password: string,
-      gender: string,
-      role: string,
-      createdDate: string
-    ) {
-      this.employeeId = employeeId;
-      this.employeeName = employeeName;
-      this.contactNo = contactNo;
-      this.emailId = emailId;
-      this.deptId = deptId;
-      this.password = password;
-      this.gender = gender;
-      this.role = role;
-      this.createdDate = createdDate;
+    createdDate: Date;
+
+    constructor(){
+      this.employeeId = 0;
+      this.employeeName = '';
+      this.contactNo = '';
+      this.emailId = '';
+      this.deptId = 0;
+      this.password = '';
+      this.gender = '';
+      this.role = 'Employee';
+      this.createdDate = new Date();
     }
   }
 
@@ -40,7 +30,7 @@ export class Employee {
   }
   export interface IChildDept{
     childDeptId: number,
-    parentDeptId: string,
+    parentDeptId: number,
     departmentName: string,
 
 }
@@ -49,4 +39,3 @@ export interface IApiResponse{
     result:boolean,
     data:any
 }
-  
