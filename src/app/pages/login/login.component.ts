@@ -11,12 +11,14 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   loginObj: any = {
-    userName: '',
-    password: '',
+    userName: "",
+    password: ""
   };
-  http = inject(HttpClient);
-  router = inject(Router);
-
+  // private http = inject(HttpClient);
+  // private router = inject(Router);
+constructor(private http: HttpClient, private router: Router) {
+  // this.loginObj();
+}
   onlogin() {
     debugger;
     this.http
