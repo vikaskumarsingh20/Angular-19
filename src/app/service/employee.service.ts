@@ -16,6 +16,9 @@ export class EmployeeService {
   getEmployeeList(){
     return this.http.get<Employee[]>('https://projectapi.gerasim.in/api/EmployeeManagement/GetAllEmployees');
   }
+  updateEmployee(obj: Employee){
+    return this.http.put<Employee>(`https://projectapi.gerasim.in/api/EmployeeManagement/UpdateEmployee/${obj.employeeId}`, obj);
+  }
   deleteEmployeeById( employeeId: number){
     return this.http.delete<Employee>('https://projectapi.gerasim.in/api/EmployeeManagement/DeleteEmployee' + employeeId);
   }
