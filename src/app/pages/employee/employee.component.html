@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-7">
+  <div  [class]="isSidePanelOpen() ?'col-7':'col-12'">
     <div class="card">
       <div class="card-header bg-secondary">
         <div class="row">
@@ -7,7 +7,7 @@
             <strong>Employee Portal</strong>
           </div>
           <div class="col-6 text-end">
-            <button class="btn btn-warning">Add New</button>
+            <button class="btn btn-warning" (click)="addNew()">Add New</button>
           </div>
         </div>
       </div>
@@ -24,30 +24,24 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>Angular Developer</td>
-              <td>12345</td>
-              <td>Data1 12</td>
-              <td>2556</td>
-              <td><button class="btn btn-success btn-sm">Edit</button><button
-                  class="btn btn-danger btn-sm">Delete</button></td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>pawan kumar</td>
-              <td>1234</td>
-              <td>chetan 12</td>
-              <td>2557</td>
-              <td><button class="btn btn-success btn-sm">Edit</button><button
-                  class="btn btn-danger btn-sm">Delete</button></td>
-            </tr>
+            @for (item of employeesList; track $index) {
+              <tr>
+                <td>{{$index +1}}</td>
+                <td>{{item.employeeName}}</td>
+                <td>{{item.contactNo}}</td>
+                <td>{{item.emailId}}</td>
+                <td>{{item.deptId}}</td>
+                <td class="d-flex justify-content-around">
+                  <button class="btn btn-success" (click)="onEdit(item)">Edit</button>
+                   <button class="btn btn-danger" (click)="onDeleteEmployee(item.employeeId)">Delete</button></td>
+              </tr>
+            }
           </tbody>
         </table>
       </div>
     </div>
   </div>
-
+@if(isSidePanelOpen()){
   <div class="col-5">
     <div class="card">
       <div class="card-header bg-secondary">
@@ -56,7 +50,7 @@
             <strong>New Employee</strong>
           </div>
           <div class="col-6 text-end">
-            <button class="btn btn-primary">Close</button>
+            <button class="btn btn-primary" (click)="close()">Close</button>
           </div>
         </div>
       </div>
@@ -84,7 +78,7 @@
           <div class="row">
             <div class="col-md-6">
               <label for="deptId" class="form-label">Parent Department</label>
-              <select id="deptId" name="deptId" class="form-select" [(ngModel)]="employeeObj.deptId"
+              <select id="deptId" name="deptId" class="form-select"
                 (change)="onDepartmentChange()">
                 <option *ngFor="let item of parentDepartList; let i = index" [value]="item.departmentId">
                   {{ item.departmentName }}
@@ -94,7 +88,7 @@
             </div>
             <div class="col-md-6">
               <label for="deptId" class="form-label">Child Department</label>
-              <select id="deptId" name="deptId" class="form-select" [(ngModel)]="employeeObj.deptId">
+              <select id="deptId" name="deptId" class="form-select"  >
                 <option *ngFor="let item of childDepartList; let i = index" [value]="item.childDepartList">
                   {{ item.departmentName }}
                 </option>
@@ -113,16 +107,20 @@
                     <input type="radio" value="Female" name="gender"[(ngModel)]="employeeObj.gender" /> Female
                   </label>
                 </div>
-
-            <div class="col-md-6 mt-4 mb-4">
-
-              <!-- Submit Button -->
-              <button type="button"(click)="onSaveEmployee()" class="btn btn-warning mt-3">Submit</button>
-            </div>
+          </div>
+          <div class="col-md-6 mt-4 mb-4">
+            @if(employeeObj.employeeId) {
+              <button type="button"(click)="onUpdateEmployee()" class="btn btn-primary">Update</button>
+            } @else {
+              <button type="button"(click)="onSaveEmployee()" class="btn btn-warning">Submit</button>
+            }
+            <!-- <button type="button"(click)="onSaveEmployee()" class="btn btn-warning mt-3">Submit</button> -->
           </div>
         </form>
       </div>
       <router-outlet></router-outlet>
     </div>
   </div>
+}
+
 </div>

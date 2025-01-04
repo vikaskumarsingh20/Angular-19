@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal, Signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { MasterService } from '../../service/master.service';
 import { Employee, IApiResponse } from '../../modal/Employee';
@@ -10,12 +10,14 @@ import { EmployeeService } from '../../service/employee.service';
   selector: 'app-employee',
   imports: [RouterModule, NgFor, FormsModule],
   templateUrl: './employee.component.html',
-  styleUrl: './employee.component.css'
+  styleUrl: './employee.component.css',
 })
 export class EmployeeComponent implements OnInit {
+  parentDepartList: any = ([] = []);
+  childDepartList: any = ([] = []);
+  employeesList: any = ([] = []);
 
-  parentDepartList: any = [] = [];
-  childDepartList: any = [] = [];
+ isSidePanelOpen = signal<boolean>(false);
 
   deptId: number = 0;
   masterService = inject(MasterService);
@@ -24,30 +26,75 @@ export class EmployeeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getParentDepartList();
+    this.getEmployees();
+  }
+  addNew(){
+    this.isSidePanelOpen.set(true);
+  }
+  close(){
+    this.isSidePanelOpen.set(false);
+  }
+  getEmployees() {
+    this.employeeService.getEmployeeList().subscribe((res: Employee[]) => {
+      this.employeesList = res;
+    });
   }
   getParentDepartList() {
     this.masterService.getDepartmentList().subscribe((res: IApiResponse) => {
       this.parentDepartList = res.data;
     });
   }
-
   onDepartmentChange() {
-    this.masterService.getChildDepartmentList(this.deptId).subscribe((res: IApiResponse) => {
-      this.childDepartList = res.data;
-    });
+    this.masterService
+      .getChildDepartmentList(this.deptId)
+      .subscribe((res: IApiResponse) => {
+        this.childDepartList = res.data;
+      });
   }
+  onEdit(obj:Employee) {
+    this.employeeObj = obj;
+  }
+
+  onUpdateEmployee(){
+    debugger;
+    this.employeeService.updateEmployee(this.employeeObj).subscribe(
+      (res: Employee) => {
+        alert(' Employee updated successfully');
+        this.getEmployees();
+      },
+      (error) => {
+        alert(' Error while updating employee');
+      }
+    );
+  }
+  onDeleteEmployee(employeeId: number) {
+    const result = confirm('Are you sure you want to delete this employee?');
+    if (result) {
+      debugger;
+
+      this.employeeService.deleteEmployeeById(employeeId).subscribe(
+        (res: Employee) => {
+          alert('Employee deleted successfully');
+          this.getEmployees();
+        },
+        (error) => {
+          alert('Error while deleting employee');
+        }
+      );
+    }
+  }
+
   onSaveEmployee() {
     debugger;
-    this.employeeService.createEmployee(this.employeeObj).subscribe({
-      next: (res: Employee) => {
-        debugger;
-        alert("Employee created successfully");
+    this.employeeService.createEmployee(this.employeeObj).subscribe(
+      (res: Employee) => {
+        alert('Employee created successfully');
+        this.getEmployees();
       },
-      error: (err) => {
-        alert("Error while creating employee");
+      (error) => {
+        console.error( error);
+        alert('Error while creating employee');
       }
-    });
+    );
   }
 }
-
-
