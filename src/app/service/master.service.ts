@@ -7,14 +7,15 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class MasterService {
+  private apiUrl = 'https://projectapi.gerasim.in/api/EmployeeManagement';
 
   constructor(private http: HttpClient) { }
 
-  getDepartmentList(){
-    return this.http.get<IApiResponse>('https://projectapi.gerasim.in/api/EmployeeManagement/GetParentDepartment');
+  getDepartmentList() {
+    return this.http.get<IApiResponse>(`${this.apiUrl}/GetParentDepartment`);
   }
 
-  getChildDepartmentList(parentDeptId: number) : Observable<IApiResponse>{
-    return this.http.get<IApiResponse>('https://projectapi.gerasim.in/api/EmployeeManagement/GetChildDepartmentByParentId?parentDeptId='+parentDeptId);
+  getChildDepartmentList(parentDeptId: number): Observable<IApiResponse> {
+    return this.http.get<IApiResponse>(`${this.apiUrl}/GetChildDepartmentByParentId?parentDeptId=${parentDeptId}`);
   }
 }

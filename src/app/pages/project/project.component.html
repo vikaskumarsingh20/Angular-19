@@ -22,15 +22,16 @@
           </thead>
           <tbody>
             <!-- Keep only the first row -->
-            <tr>
-              <td>1</td>
-              <td>JIRA APPLICATION</td>
-              <td>TCS</td>
-              <td>01-January-25</td>
-              <td>virat-kohli</td>
+            <tr *ngFor="let project of projectList ; let sr = index">
+              <td>{{sr +1}}</td>
+              <td> {{project.projectName}}</td>
+              <td> {{project.clientName}}</td>
+                <td> {{project.startDate | date:'dd-MM-yyyy' }}</td>
+              <td> {{project.employeeName}}</td>
+              <!-- <td></td> -->
               <td>
                 <!-- <button class="btn btn-primary" (click)="onEdit()">Edit</button> -->
-                <button class="btn btn-primary">Edit</button>
+                <button class="btn btn-primary" (click)="onEdit(project)">Edit</button>
                 <button class="btn btn-success mx-2">Employees</button>
               </td>
             </tr>
@@ -50,41 +51,41 @@
           </div>
         </div>
         <div class="card-body">
-          <form novalidate class="mb-4">
+          <form novalidate class="mb-4" [formGroup]="projectForm" (ngSubmit)="onSubmit()">
             <div class="row">
               <div class=" col-md-6 mt-3">
-                <label for="projectName" class="form-label">Project Name</label>
+                <label for="projectName" formControlName="projectName" class="form-label">Project Name</label>
                 <input type="text" id="projectName" placeholder="Enter project name" class="form-control">
               </div>
               <div class=" col-md-6 mt-3">
-                <label for="clientName" class="form-label">Client Name</label>
+                <label for="clientName"  formControlName="clientName" class="form-label">Client Name</label>
                 <input type="text" id="clientName" placeholder="Enter client name" class="form-control">
               </div>
             </div>
             <div class="row">
               <div class=" col-md-6 mt-3">
-                <label for="startDate" class="form-label">Start Date</label>
+                <label for="startDate" formControlName="startDate" class="form-label">Start Date</label>
                 <input type="date" id="startDate" class="form-control">
               </div>
               <div class=" col-md-6 mt-3">
-                <label for="leadByEmpId" class="form-label">Lead By Employee ID</label>
+                <label for="leadByEmpId" formControlName="leadByEmpId" class="form-label">Lead By Employee ID</label>
                 <select id="leadByEmpId" class="form-select">
                   <option value="">Select Employee</option>
-                  <option value="4542">Angular Developer-12</option>
+                  <option *ngFor="let emp of employeeData$ | async" [value]="emp.employeeId">{{emp.employeeName}}</option>
                 </select>
               </div>
             </div>
             <div class="row">
               <div class=" col-md-6 mt-3">
-                <label for="contactPerson" class="form-label">Contact Person</label>
+                <label for="contactPerson" formControlName="contactPerson" class="form-label">Contact Person</label>
                 <input type="text" id="contactPerson" placeholder="Enter contact person name" class="form-control">
               </div>
               <div class=" col-md-6 mt-3">
-                <label for="contactNoProject" class="form-label">Contact No</label>
-                <input type="text" id="contactNoProject" placeholder="Enter contact number" class="form-control">
+                <label for="contactNo" formControlName="contactNo" class="form-label">Contact No</label>
+                <input type="text" id="contactNo" placeholder="Enter contact number" class="form-control">
               </div>
               <div class=" col-md-6 mt-3">
-                <label for="emailId" class="form-label">Email ID</label>
+                <label for="emailId" formControlName="emailId" class="form-label">Email ID</label>
                 <input type="email" id="emailId" placeholder="Enter email ID" class="form-control">
               </div>
             </div>
