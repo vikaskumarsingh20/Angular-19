@@ -1,12 +1,11 @@
 import { AsyncPipe, DatePipe, NgFor, NgIf } from '@angular/common';
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, ElementRef, inject, OnInit, signal, ViewChild, viewChild } from '@angular/core';
 import { Form, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MasterService } from '../../service/master.service';
-import { Employee } from '../../modal/Employee';
+import { Employee, Project } from '../../modal/Employee';
 import { EmployeeService } from '../../service/employee.service';
 import { Observable } from 'rxjs';
-import { Project } from '../../modal/Projects';
 
 @Component({
   selector: 'app-project',
@@ -17,6 +16,9 @@ import { Project } from '../../modal/Projects';
 export class ProjectComponent  implements OnInit {
 
  currentView : string = 'List';
+
+ @ViewChild("myModal") employeeModal :ElementRef | undefined;
+
  projectForm : FormGroup = new FormGroup({});
 
  employeeService = inject(EmployeeService);
@@ -35,13 +37,24 @@ export class ProjectComponent  implements OnInit {
   }
   onSubmit(){
     const formVs = this.projectForm.value;
-    debugger;
-    this.employeeService.createNewProject(formVs).subscribe((res:Project) => {
+    if (formVs.projectId === 0) {
       debugger;
-      alert('Project Created Successfully');
-    },(error) => {
-      alert('Error while creating project');
-  });
+      this.employeeService.createNewProject(formVs).subscribe((res:Project) => {
+        debugger;
+        alert('Project Created Successfully');
+      },(error) => {
+        alert('Error while creating project');
+    });
+    } else {
+      debugger;
+      this.employeeService.updateProject(formVs).subscribe((res:Project) => {
+        debugger;
+        alert('Project Created Successfully');
+      },(error) => {
+        alert('Error while creating project');
+    });
+    }
+
   }
   getAllProjects(){
     this.employeeService.getAllProjects().subscribe((res:Project[]) => {
@@ -53,6 +66,18 @@ export class ProjectComponent  implements OnInit {
 onEdit(projectData: Project){
   this.initializeForm( projectData);
 }
+onAddEmployee(id: number){
+  if(this.employeeModal){
+    this.employeeModal.nativeElement.style.display = 'block';
+  }
+}
+closeModal(){
+  if(this.employeeModal){
+    this.employeeModal.nativeElement.style.display = 'none';
+  }
+}
+
+
 initializeForm(project?: Project) {
   this.projectForm = new FormGroup({
     projectId: new FormControl(project ? project.projectId : 0),

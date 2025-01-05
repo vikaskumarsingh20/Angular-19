@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Employee, IApiResponse } from '../modal/Employee';
-import { Project } from '../modal/Projects';
+import { Employee, IApiResponse, Project } from '../modal/Employee';
 
 @Injectable({
   providedIn: 'root'
@@ -33,5 +32,8 @@ export class EmployeeService {
   }
 getAllProjects() {
   return this.http.get<Project[]>(`${this.apiUrl}GetAllProjects`);
+}
+updateProject(obj: Project) {
+  return this.http.put<Project>(`${this.apiUrl}UpdateProject/${obj.projectId}`, obj);
 }
 }
