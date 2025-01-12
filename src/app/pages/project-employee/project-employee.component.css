@@ -1,0 +1,16 @@
+.container {
+  padding: 20px;
+}
+
+.card {
+  border-radius: 10px;
+  background-color: #f8f9fa;
+}
+
+.table {
+  margin-top: 20px;
+}
+
+.btn-info {
+  margin-right: 10px;
+}

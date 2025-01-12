@@ -1,1 +1,34 @@
-<p>project-employee works!</p>
+<div class="container">
+  <h2 class="mb-4">Project Employee</h2>
+  <div class="card mb-3">
+    <div class="card-body">
+      <h5 class="card-title">Employee Details</h5>
+      <p class="card-text">View and manage project employees.</p>
+      <button class="btn btn-primary" (click)="addEmployee()">Add Employee</button>
+    </div>
+  </div>
+
+  <table class="table table-bordered table-hover text-nowrap text-center">
+    <thead class="table-light">
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Role</th>
+        <th>Project</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employee of employees; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ employee.name }}</td>
+        <td>{{ employee.role }}</td>
+        <td>{{ employee.project }}</td>
+        <td>
+          <button class="btn btn-sm btn-info" (click)="editEmployee(i)">Edit</button>
+          <button class="btn btn-sm btn-danger" (click)="deleteEmployee(i)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
