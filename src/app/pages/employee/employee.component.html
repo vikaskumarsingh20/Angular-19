@@ -12,10 +12,11 @@
         </div>
       </div>
       <div class="card-body">
-        <table class="table table-bordered">
+        <div class="table-responsive">
+        <table class="table table-bordered text-nowrap text-center">
           <thead>
             <tr>
-              <th>Sr No</th>
+              <th>Sr No.</th>
               <th>Name</th>
               <th>Contact No</th>
               <th>Email</th>
@@ -31,13 +32,14 @@
                 <td>{{item.contactNo}}</td>
                 <td>{{item.emailId}}</td>
                 <td>{{item.deptId}}</td>
-                <td class="d-flex justify-content-around">
+                <td class="d-flex justify-content-evenly gap-1">
                   <button class="btn btn-success" (click)="onEdit(item)">Edit</button>
                    <button class="btn btn-danger" (click)="onDeleteEmployee(item.employeeId)">Delete</button></td>
               </tr>
             }
           </tbody>
         </table>
+      </div>
       </div>
     </div>
   </div>
