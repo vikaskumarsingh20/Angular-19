@@ -1,1 +1,107 @@
-<p>dashboard works!</p>
+<div class="container-fluid p-4" id="dashboard">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Dashboard</h2>
+    <button id="themeToggle" class="btn btn-primary" (click)="toggleTheme()">Toggle Theme</button>
+  </div>
+
+  <div class="row g-3 mb-4">
+    <div class="col-md-3">
+      <div class="card p-3 text-center bg-primary text-white">
+        <h3>All Projects</h3>
+        <h2>89</h2>
+        <p>13% Increase</p>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card p-3 text-center bg-success text-white">
+        <h3>Team Members</h3>
+        <h2>5,990</h2>
+        <p>4% Increase</p>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card p-3 text-center bg-warning text-dark">
+        <h3>Total Budget</h3>
+        <h2>$80,990</h2>
+        <p>13% Decrease</p>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card p-3 text-center bg-danger text-white">
+        <h3>Employees</h3>
+        <h2>3</h2>
+        <p>13% Decrease</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card p-3">
+    <h4>Ongoing Projects | 32 Projects</h4>
+    <table class="table table-dark table-striped table-hover mt-3">
+      <thead>
+        <tr>
+          <th>Project</th>
+          <th>Deadline</th>
+          <th>Leader + Team</th>
+          <th>Budget</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>New Dashboard</td>
+          <td class="text-danger">17th Oct, 15<br><small>Overdue</small></td>
+          <td>
+            <img src="https://via.placeholder.com/30" alt="Leader" class="rounded-circle me-2">
+            Myrtle Erickson<br><small>UK Design Team</small>
+          </td>
+          <td>$4,670<br><small>Paid</small></td>
+          <td><span class="status-indicator status-in-progress"></span> In Progress</td>
+          <td>
+            <button class="btn btn-sm btn-secondary">Actions</button>
+          </td>
+        </tr>
+        <tr>
+          <td>New Dashboard</td>
+          <td class="text-danger">17th Oct, 15<br><small>Overdue</small></td>
+          <td>
+            <img src="https://via.placeholder.com/30" alt="Leader" class="rounded-circle me-2">
+            Myrtle Erickson<br><small>UK Design Team</small>
+          </td>
+          <td>$4,670<br><small>Paid</small></td>
+          <td><span class="status-indicator status-blocked"></span> Blocked</td>
+          <td>
+            <button class="btn btn-sm btn-secondary">Actions</button>
+          </td>
+        </tr>
+        <tr>
+          <td>New Dashboard</td>
+          <td class="text-danger">17th Oct, 15<br><small>Overdue</small></td>
+          <td>
+            <img src="https://via.placeholder.com/30" alt="Leader" class="rounded-circle me-2">
+            Myrtle Erickson<br><small>UK Design Team</small>
+          </td>
+          <td>$4,670<br><small>Paid</small></td>
+          <td><span class="status-indicator status-in-progress"></span> In Progress</td>
+          <td>
+            <button class="btn btn-sm btn-secondary">Actions</button>
+          </td>
+        </tr>
+        <tr>
+          <td>New Dashboard</td>
+          <td class="text-danger">17th Oct, 15<br><small>Overdue</small></td>
+          <td>
+            <img src="https://via.placeholder.com/30" alt="Leader" class="rounded-circle me-2">
+            Myrtle Erickson<br><small>UK Design Team</small>
+          </td>
+          <td>$4,670<br><small>Paid</small></td>
+          <td><span class="status-indicator status-blocked"></span> Blocked</td>
+          <td>
+            <button class="btn btn-sm btn-secondary">Actions</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
