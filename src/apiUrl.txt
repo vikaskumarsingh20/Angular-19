@@ -1,1 +1,1 @@
-https://projectapi.gerasim.in/index.html
+This is api url : 'https://projectapi.gerasim.in/index.html'
