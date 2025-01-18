@@ -46,8 +46,7 @@
                   "maximumError": "8kB"
                 }
               ],
-              "outputHashing": "all",
-              "baseHref": "/4209/"
+              "outputHashing": "all"
             },
             "development": {
               "optimization": false,
