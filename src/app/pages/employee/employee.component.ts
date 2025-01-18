@@ -40,6 +40,7 @@ export class EmployeeComponent implements OnInit {
     });
   }
   getParentDepartList() {
+    debugger;
     this.masterService.getDepartmentList().subscribe((res: IApiResponse) => {
       this.parentDepartList = res.data;
     });
